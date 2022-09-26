@@ -1,1 +1,1 @@
-# -RandLA-Net_demo
+# RandLA-Net_demo
