@@ -71,7 +71,7 @@ class CloudsDataset(Dataset):
         self.input_names = {'training': [], 'validation': []}
         self.val_proj = []
         self.val_labels = []
-        self.val_split = '1_'
+        self.val_split = '_2'
 
         self.load_data()
         print('Size of training : ', len(self.input_colors['training']))

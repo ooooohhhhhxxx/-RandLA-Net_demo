@@ -60,6 +60,7 @@ class LocalSpatialEncoding(nn.Module):
 
         self.num_neighbors = num_neighbors
         self.mlp = SharedMLP(10, d, bn=True, activation_fn=nn.ReLU())
+        # self.mlp = SharedMLP(14, d, bn=True, activation_fn=nn.ReLU())
 
         self.device = device
 
@@ -280,6 +281,7 @@ class RandLANet(nn.Module):
                 1
             ) # shape (B, N, 1)
             neighbors = neighbors.to(self.device)
+            # neighbors = neighbors.unsqueeze(2).to(self.device)
 
             extended_neighbors = neighbors.unsqueeze(1).expand(-1, x.size(1), -1, 1)
 
@@ -306,6 +308,7 @@ if __name__ == '__main__':
 
     d_in = 7
     cloud = 1000*torch.randn(1, 2**16, d_in).to(device)
+    # model = RandLANet(d_in, 6, 16, 4, device)
     model = RandLANet(d_in, 6, 16, 4, device)
     # model.load_state_dict(torch.load('checkpoints/checkpoint_100.pth'))
     model.eval()

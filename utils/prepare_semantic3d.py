@@ -5,7 +5,7 @@ from tqdm import tqdm
 from ply import write_ply
 
 output_type = 'npy'
-i_dont_have_a_lot_of_memory_ok = True
+i_dont_have_a_lot_of_memory_ok = False
 ROOT_PATH = (Path(__file__) / '..' / '..').resolve()
 DATASET_PATH = ROOT_PATH / 'semantic3d'
 RAW_PATH = DATASET_PATH / 'original_data'
@@ -77,7 +77,7 @@ for pc_path in RAW_PATH.glob('*.txt'):
         labels_path = RAW_PATH / (name + '.labels')
         if labels_path.exists():
             labels = np.loadtxt(labels_path, dtype=np.float32)
-            dir = VAL_PATH if '3' in name else TRAIN_PATH
+            dir = VAL_PATH if '2' in name else TRAIN_PATH
             if output_type=='ply' :
                 write_ply(dir / pc_name, [points, labels], 'x y z intensity red green blue class'.split(' '))
             else :
