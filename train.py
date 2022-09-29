@@ -17,6 +17,14 @@ from model import RandLANet
 from utils.tools import Config as cfg
 from utils.metrics import accuracy, intersection_over_union
 
+# import os
+# os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+# torch.cuda.set_device(0)
+
+# import os
+# os.environ['CUDA_VISIBLE_DEVICES'] = "1"
+# torch.backends.cudnn.enabled = False
+
 def evaluate(model, loader, criterion, device):
     model.eval()
     losses = []
@@ -204,7 +212,7 @@ if __name__ == '__main__':
     misc = parser.add_argument_group('Miscellaneous')
 
     base.add_argument('--dataset', type=Path, help='location of the dataset',
-                        default='datasets/s3dis/subsampled')
+                        default='semantic3d\subsampled_data')
 
     expr.add_argument('--epochs', type=int, help='number of epochs',
                         default=50)
@@ -236,7 +244,7 @@ if __name__ == '__main__':
     misc.add_argument('--gpu', type=int, help='which GPU to use (-1 for CPU)',
                         default=0)
     misc.add_argument('--name', type=str, help='name of the experiment',
-                        default=None)
+                        default='9.29')
     misc.add_argument('--num_workers', type=int, help='number of threads for loading data',
                         default=0)
     misc.add_argument('--save_freq', type=int, help='frequency of saving checkpoints',
@@ -257,7 +265,7 @@ if __name__ == '__main__':
         if args.load:
             args.name = args.load
         else:
-            args.name = datetime.now().strftime('%Y-%m-%d_%H:%M')
+            args.name = datetime.now().strftime('%Y-%m-%d_%H_%M')
 
     t0 = time.time()
     train(args)
